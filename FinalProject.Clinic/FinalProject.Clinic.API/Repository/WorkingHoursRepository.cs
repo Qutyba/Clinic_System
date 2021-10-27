@@ -31,8 +31,8 @@ namespace FinalProject.Clinic.Infra.Repository
             p.Add("@BreakTo", workingHours.BreakTo, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
 
-            var result = dbContext.Connection.ExecuteAsync("WorkingHours_Update", p, commandType: CommandType.StoredProcedure);
-            return true;
+            var result = dbContext.Connection.ExecuteAsync("WorkingHours_Update", p, commandType: CommandType.StoredProcedure).Result > 0;
+            return result;
         }
 
         public bool WorkingHours_Insert(WorkingHours workingHours)
@@ -45,25 +45,25 @@ namespace FinalProject.Clinic.Infra.Repository
             p.Add("@BreakFrom", workingHours.BreakFrom, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             p.Add("@BreakTo", workingHours.BreakTo, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
-            var result = dbContext.Connection.ExecuteAsync("WorkingHours_Insert", p, commandType: CommandType.StoredProcedure);
-            return true;
+            var result = dbContext.Connection.ExecuteAsync("WorkingHours_Insert", p, commandType: CommandType.StoredProcedure).Result > 0;
+            return result;
         }
 
         public bool WorkingHours_Delete(int id)
         {
             var p = new DynamicParameters();
             p.Add("@WorkingHoursID", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            var result = dbContext.Connection.ExecuteAsync("WorkingHours_Delete", p, commandType: CommandType.StoredProcedure);
-            return true;
+            var result = dbContext.Connection.ExecuteAsync("WorkingHours_Delete", p, commandType: CommandType.StoredProcedure).Result > 0;
+            return result;
         }
 
-        public List<WorkingHours> WorkingHours_Get(WorkingHoursDTO workingHoursDTO)
+        public List<WorkingHours> WorkingHours_Get(WorkingHours workingHours)
         {
             var p = new DynamicParameters();
 
-            p.Add("@ClinicID", workingHoursDTO.ClinicID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("@WorkingHoursID", workingHoursDTO.WorkingHoursID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("@DayID", workingHoursDTO.DayID, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@ClinicID", workingHours.ClinicId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@WorkingHoursID", workingHours.WorkingHoursId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@DayID", workingHours.DayId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             IEnumerable<WorkingHours> result = dbContext.Connection.Query<WorkingHours>("WorkingHours_Get", commandType: CommandType.StoredProcedure);
             return result.ToList();
         }

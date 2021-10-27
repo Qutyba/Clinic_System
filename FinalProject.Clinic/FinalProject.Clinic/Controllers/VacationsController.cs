@@ -1,63 +1,55 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FinalProject.Clinic.Core;
+using FinalProject.Clinic.Core.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FinalProject.Clinic.Core;
-using FinalProject.Clinic.Core.DTO;
-using FinalProject.Clinic.Core.Service;
 
 namespace FinalProject.Clinic.API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class VacationsController : Controller
+    public class VacationsController : ControllerBase
     {
-
-        public readonly IVacationsService vacationsService;
-
-        public VacationsController(IVacationsService vacationsService)
+        private readonly IVacationsService vacationsService;
+        public VacationsController(IVacationsService _vacationsService)
         {
-            this.vacationsService = vacationsService;
+            vacationsService = _vacationsService;
+        }
+
+        [HttpGet]
+        [Route("Vacations_Get")]
+        [ProducesResponseType(typeof(List<Vacations>), StatusCodes.Status200OK)]
+        public List<Vacations> Vacations_Get(Vacations vacations)
+        {
+            return vacationsService.Vacations_Get(vacations);
+        }
+
+        [HttpPost]
+        [Route("Vacations_Insert")]
+        [ProducesResponseType(typeof(Clinics), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public bool Vacations_Insert([FromBody] Vacations vacations)
+        {
+            return vacationsService.Vacations_Insert(vacations);
         }
 
         [HttpPut]
         [Route("Vacations_Update")]
-        [ProducesResponseType(typeof(Vacations), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<Clinics>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public bool Vacations_Update(Vacations vacation)
-        {
-            return this.vacationsService.Vacations_Update(vacation);
+        public bool Vacations_Update([FromBody] Vacations vacations)
+        { 
+            return vacationsService.Vacations_Update(vacations);
         }
 
-
-        [HttpPost]
-        [ProducesResponseType(typeof(Vacations), StatusCodes.Status200OK)]
-        [Route("Vacations_Insert")]
-        public bool Vacations_Insert(Vacations vacations)
-        {
-            return this.vacationsService.Vacations_Insert(vacations);
-        }
         [HttpDelete]
-        [Route("Delete/{id}")]
-        [ProducesResponseType(typeof(Vacations), StatusCodes.Status200OK)]
+        [Route("Vacations_Delete/{id}")]
         public bool Vacations_Delete(int id)
         {
-            return this.vacationsService.Vacations_Delete(id);
+            return vacationsService.Vacations_Delete(id);
         }
-        [HttpPost]
-        [Route("Vacations_Get")]
-        [ProducesResponseType(typeof(List<Vacations>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public List<Vacations> Vacations_Get(VacationsDTO vacationsDto)
-        {
-            return this.vacationsService.Vacations_Get(vacationsDto);
-        }
-
-
-
-
-
     }
 }

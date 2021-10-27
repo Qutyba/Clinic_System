@@ -15,14 +15,13 @@ namespace FinalProject.Clinic.API.Controllers
     {
         public readonly IDaysService daysService;
 
-  
-
         public DaysController(IDaysService daysService)
         {
             this.daysService = daysService;
 
         }
         [HttpGet]
+        [Route("Days_Get")]
         [ProducesResponseType(typeof(List<Days>), StatusCodes.Status200OK)]
         public List<Days> Days_Get()
         {

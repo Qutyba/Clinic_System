@@ -21,7 +21,7 @@ namespace FinalProject.Clinic.API.Controllers
         }
 
         [HttpPost]
-        [Route("InsertUsers")]
+        [Route("Users_Insert")]
         [ProducesResponseType(typeof(List<Users>), StatusCodes.Status200OK)]
         public bool Users_Insert([FromBody] Users users)
         {
@@ -29,7 +29,7 @@ namespace FinalProject.Clinic.API.Controllers
         }
 
         [HttpPost]
-        [Route("GetUsers")]
+        [Route("Users_Get")]
         [ProducesResponseType(typeof(List<Users>), StatusCodes.Status200OK)]
 
         public List<Users> Users_Get(Users users)
@@ -38,7 +38,7 @@ namespace FinalProject.Clinic.API.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateUsers")]
+        [Route("Users_Update")]
         [ProducesResponseType(typeof(Users), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public bool Users_Update([FromBody] Users users)
@@ -46,7 +46,7 @@ namespace FinalProject.Clinic.API.Controllers
             return usersService.Users_Update(users);
         }
         [HttpDelete]
-        [Route("DeleteUsers")]
+        [Route("Users_Delete")]
         [ProducesResponseType(typeof(Users), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public bool Users_Delete(int id)
@@ -70,7 +70,7 @@ namespace FinalProject.Clinic.API.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateUsersPasswords")]
+        [Route("Users_UpdatePassword")]
         [ProducesResponseType(typeof(Users), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public bool Users_UpdatePassword([FromBody]UsersUpdatePasswordDTO users)

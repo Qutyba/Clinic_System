@@ -1,40 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FinalProject.Clinic.Core;
-using FinalProject.Clinic.Core.DTO;
+﻿using FinalProject.Clinic.Core;
 using FinalProject.Clinic.Core.Repository;
 using FinalProject.Clinic.Core.Service;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace FinalProject.Clinic.Infra.Service
 {
-    public class VacationsService:IVacationsService
+    public class VacationsService : IVacationsService
     {
-        public readonly IVacationsRepository vacationsRepository;
-
-        public VacationsService(IVacationsRepository vacationsRepository)
+        private readonly IVacationsRepository vacations_Repository;
+        public VacationsService(IVacationsRepository _vacations_Repository)
         {
-            this.vacationsRepository = vacationsRepository;
+            vacations_Repository = _vacations_Repository;
         }
 
-        public bool Vacations_Update(Vacations vacation)
-        {
-            return this.vacationsRepository.Vacations_Update(vacation);
-        }
 
+        public List<Vacations> Vacations_Get(Vacations vacations)
+        {
+            return vacations_Repository.Vacations_Get(vacations);
+        }
         public bool Vacations_Insert(Vacations vacations)
         {
-            return this.vacationsRepository.Vacations_Insert(vacations);
+            return vacations_Repository.Vacations_Insert(vacations);
         }
 
+        public bool Vacations_Update(Vacations vacations)
+        {
+            return vacations_Repository.Vacations_Update(vacations);
+        }
         public bool Vacations_Delete(int id)
         {
-            return this.vacationsRepository.Vacations_Delete(id);
-        }
-
-        public List<Vacations> Vacations_Get(VacationsDTO vacationsDto)
-        {
-            return this.vacationsRepository.Vacations_Get(vacationsDto);
+            return vacations_Repository.Vacations_Delete(id);
         }
     }
 }

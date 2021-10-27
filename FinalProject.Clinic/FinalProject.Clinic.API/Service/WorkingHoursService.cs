@@ -22,9 +22,9 @@ namespace FinalProject.Clinic.Infra.Service
             return this.workingHoursRepository.WorkingHours_Delete(id);
         }
 
-        public List<WorkingHours> WorkingHours_Get(WorkingHoursDTO workingHoursDTO)
+        public List<WorkingHours> WorkingHours_Get(WorkingHours workingHours)
         {
-            return this.workingHoursRepository.WorkingHours_Get(workingHoursDTO);
+            return this.workingHoursRepository.WorkingHours_Get(workingHours);
         }
 
         public bool WorkingHours_Insert(WorkingHours workingHours)

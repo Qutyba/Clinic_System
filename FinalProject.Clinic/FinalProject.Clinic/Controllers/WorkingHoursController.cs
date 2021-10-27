@@ -22,7 +22,7 @@ namespace FinalProject.Clinic.API.Controllers
         }
 
         [HttpDelete]
-        [Route("Delete/{id}")]
+        [Route("WorkingHours_Delete/{id}")]
         [ProducesResponseType(typeof(WorkingHours), StatusCodes.Status200OK)]
         public bool WorkingHours_Delete(int id)
         {
@@ -32,9 +32,9 @@ namespace FinalProject.Clinic.API.Controllers
         [Route("WorkingHours_Get")]
         [ProducesResponseType(typeof(List<WorkingHours>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public List<WorkingHours> WorkingHours_Get(WorkingHoursDTO workingHoursDTO)
+        public List<WorkingHours> WorkingHours_Get(WorkingHours workingHours)
         {
-            return this.workingHoursService.WorkingHours_Get(workingHoursDTO);
+            return this.workingHoursService.WorkingHours_Get(workingHours);
         }
 
         [HttpPost]

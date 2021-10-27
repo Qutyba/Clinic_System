@@ -11,7 +11,7 @@ using FinalProject.Clinic.Core.Repository;
 
 namespace FinalProject.Clinic.Infra.Repository
 {
-    public class ReservationsRepository: IReservationsRepository
+    public class ReservationsRepository : IReservationsRepository
     {
 
         private readonly IDbContext dbContext;
@@ -25,40 +25,33 @@ namespace FinalProject.Clinic.Infra.Repository
             var p = new DynamicParameters();
 
             p.Add("@ClinicId", reservations.ClinicId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-
             p.Add("@PatientId", reservations.PatientId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-
-   
             p.Add("@ReservationDate", reservations.ReservationDate.Date, dbType: DbType.Date, direction: ParameterDirection.Input);
-
-     
             p.Add("@ReservationFrom", reservations.ReservationFrom, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             p.Add("@ReservationTo", reservations.ReservationTo, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 
 
-            var result = dbContext.Connection.ExecuteAsync("Reservation_Insert", p, commandType: CommandType.StoredProcedure);
+            var result = dbContext.Connection.ExecuteAsync("Reservation_Insert", p, commandType: CommandType.StoredProcedure).Result > 0;
 
-            return true;
+            return result;
         }
 
         public bool Reservation_Delete(int id)
         {
             var p = new DynamicParameters();
             p.Add("@ReservationID", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            var result = dbContext.Connection.ExecuteAsync("Reservation_Delete", p, commandType: CommandType.StoredProcedure);
-            return true;
+            var result = dbContext.Connection.ExecuteAsync("Reservation_Delete", p, commandType: CommandType.StoredProcedure).Result > 0;
+            return result;
         }
 
-        public List<Reservations> Reservation_Get(ReservationsDTO reservationsDto)
+        public List<Reservations> Reservation_Get(Reservations reservations)
         {
             var p = new DynamicParameters();
-            p.Add("@ClinicID", reservationsDto.ClinicID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("@PatientID", reservationsDto.PatientID, dbType: DbType.Int32, direction: ParameterDirection.Input);
-
-
-            p.Add("@ReservationDate", reservationsDto.ReservationDate, dbType: DbType.Date, direction: ParameterDirection.Input);
-            p.Add("@ReservationFrom", reservationsDto.ReservationFrom, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            p.Add("@ReservationTo", reservationsDto.ReservationTo, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("@ClinicID", reservations.ClinicId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@PatientID", reservations.PatientId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@ReservationDate", reservations.ReservationDate, dbType: DbType.Date, direction: ParameterDirection.Input);
+            p.Add("@ReservationFrom", reservations.ReservationFrom, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("@ReservationTo", reservations.ReservationTo, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             IEnumerable<Reservations> result = dbContext.Connection.Query<Reservations>("Reservation_Get", commandType: CommandType.StoredProcedure);
 
             return result.ToList();

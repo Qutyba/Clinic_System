@@ -1,64 +1,64 @@
-﻿using System;
+﻿using Dapper;
+using FinalProject.Clinic.Core;
+using FinalProject.Clinic.Core.Common;
+using FinalProject.Clinic.Core.Repository;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using Dapper;
-using FinalProject.Clinic.Core;
-using FinalProject.Clinic.Core.Common;
-using FinalProject.Clinic.Core.DTO;
-using FinalProject.Clinic.Core.Repository;
 
 namespace FinalProject.Clinic.Infra.Repository
 {
-    public class VacationsRepository :IVacationsRepository
+    public class VacationsRepository : IVacationsRepository
     {
-
-        private readonly IDbContext dbContext;
-        public VacationsRepository(IDbContext dbContext)
+        private readonly IDbContext DbContext;
+        public VacationsRepository(IDbContext _DbContext)
         {
-            this.dbContext = dbContext;
+            DbContext = _DbContext;
         }
 
-
-        public bool Vacations_Update(Vacations vacation)
+        public List<Vacations> Vacations_Get(Vacations vacations)
         {
             var p = new DynamicParameters();
-            p.Add("@VacationId", vacation.VacationId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("@StartDate", vacation.StartDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            p.Add("@EndDate", vacation.EndDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            p.Add("@Description", vacation.Description, dbType: DbType.String, direction: ParameterDirection.Input);
-            var result = dbContext.Connection.ExecuteAsync("Vacations_Update", p, commandType: CommandType.StoredProcedure);
-            return true;
+            p.Add("@ClinicID", vacations.ClinicId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@StartDate", vacations.StartDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("@EndDate", vacations.EndDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            IEnumerable<Vacations> result = DbContext.Connection.Query<Vacations>("Vacations_Get", p, commandType: CommandType.StoredProcedure);
+            return result.ToList();
         }
 
-        public bool Vacations_Insert(Vacations vacation)
+        public bool Vacations_Insert(Vacations vacations)
         {
             var p = new DynamicParameters();
-            p.Add("@ClinicId", vacation.ClinicId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("@StartDate", vacation.StartDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            p.Add("@EndDate", vacation.EndDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            p.Add("@Description", vacation.Description, dbType: DbType.String, direction: ParameterDirection.Input);
-            var result = dbContext.Connection.ExecuteAsync("Vacations_Update", p, commandType: CommandType.StoredProcedure);
-            return true;
+            p.Add("@ClinicID", vacations.ClinicId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@StartDate", vacations.StartDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("@EndDate", vacations.EndDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("@Description", vacations.Description, dbType: DbType.String, direction: ParameterDirection.Input);
+            var result = DbContext.Connection.ExecuteAsync("Vacations_Insert", p, commandType: CommandType.StoredProcedure).Result > 0;
+            return result;
+        }
+
+        public bool Vacations_Update(Vacations vacations)
+        {
+            var p = new DynamicParameters();
+            p.Add("@VacationID", vacations.VacationId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@ClinicID", vacations.ClinicId, dbType: DbType.Int32, direction: ParameterDirection.Input);
+            p.Add("@StartDate", vacations.StartDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("@EndDate", vacations.EndDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
+            p.Add("@Description", vacations.Description, dbType: DbType.String, direction: ParameterDirection.Input);
+            var result = DbContext.Connection.ExecuteAsync("Vacations_Update", p, commandType: CommandType.StoredProcedure).Result > 0;
+            return result;
         }
 
         public bool Vacations_Delete(int id)
         {
             var p = new DynamicParameters();
-            p.Add("@VacationId", id, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            var result = dbContext.Connection.ExecuteAsync("Vacations_Delete", p, commandType: CommandType.StoredProcedure);
-            return true;
+            p.Add("@VacationID", id, dbType: DbType.Int32, direction:
+            ParameterDirection.Input);
+            var result = DbContext.Connection.ExecuteAsync("Vacations_Delete", p, commandType: CommandType.StoredProcedure).Result > 0;
+            return result;
         }
 
-        public List<Vacations> Vacations_Get(VacationsDTO vacationsDto)
-        {
-            var p = new DynamicParameters();
-            p.Add("@StartDate", vacationsDto.StartDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            p.Add("@EndDate", vacationsDto.EndDate, dbType: DbType.DateTime, direction: ParameterDirection.Input);
-            
-            IEnumerable<Vacations> result = dbContext.Connection.Query<Vacations>("Vacations_Get", commandType: CommandType.StoredProcedure);
-            return result.ToList();
-        }
     }
 }

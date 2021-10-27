@@ -45,12 +45,26 @@ namespace FinalProject.Clinic
             services.AddScoped<IReservationsRepository, ReservationsRepository>();
             services.AddScoped<IReservationsService, ReservationsService>();
 
-            services.AddScoped<IVacationsRepository, VacationsRepository>();
-            services.AddScoped<IVacationsService, VacationsService>();
 
             services.AddScoped<IWorkingHoursRepository, WorkingHoursRepository>();
             services.AddScoped<IWorkingHoursService, WorkingHoursService>();
 
+
+            services.AddScoped<ISiteSettingsRepository, SiteSettingsRepository>();
+            services.AddScoped<ISiteSettingsService, SiteSettingsService>();
+            services.AddScoped<IContactUsRepository, ContactUsRepository>();
+            services.AddScoped<IContactUsService, ContactUsService>();
+            services.AddScoped<IReviewsRepository, ReviewsRepository>();
+            services.AddScoped<IReviewsService, ReviewsService>();
+            services.AddScoped<ITestimonialsRepository, TestimonialsRepository>();
+            services.AddScoped<ITestimonialsService, TestimonialsService>();
+
+            services.AddScoped<IClinicsRepository, ClinicsRepository>();
+            services.AddScoped<IClinicsService, ClinicsService>();
+            services.AddScoped<IClinicCategoryRepository, ClinicCategoryRepository>();
+            services.AddScoped<IClinicCategoryService, ClinicCategoryService>();
+            services.AddScoped<IVacationsRepository, VacationsRepository>();
+            services.AddScoped<IVacationsService, VacationsService>();
 
             //for authentication
             services.AddAuthentication(

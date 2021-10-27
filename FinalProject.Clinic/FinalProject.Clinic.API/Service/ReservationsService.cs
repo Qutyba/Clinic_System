@@ -27,9 +27,9 @@ namespace FinalProject.Clinic.Infra.Service
             return this.reservationsRepository.Reservation_Delete(id);
         }
 
-        public List<Reservations> Reservation_Get(ReservationsDTO reservationsDto)
+        public List<Reservations> Reservation_Get(Reservations reservations)
         {
-            return this.reservationsRepository.Reservation_Get(reservationsDto);
+            return this.reservationsRepository.Reservation_Get(reservations);
         }
     }
 }

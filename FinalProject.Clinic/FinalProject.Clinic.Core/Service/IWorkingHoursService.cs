@@ -10,6 +10,6 @@ namespace FinalProject.Clinic.Core.Service
         bool WorkingHours_Update(WorkingHours workingHours);
         bool WorkingHours_Insert(WorkingHours workingHours);
         bool WorkingHours_Delete(int id);
-        List<WorkingHours> WorkingHours_Get(WorkingHoursDTO workingHoursDTO);
+        List<WorkingHours> WorkingHours_Get(WorkingHours workingHours);
     }
 }

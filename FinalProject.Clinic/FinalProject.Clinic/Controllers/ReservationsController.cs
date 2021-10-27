@@ -40,9 +40,9 @@ namespace FinalProject.Clinic.API.Controllers
         [Route("Reservation_Get")]
         [ProducesResponseType(typeof(List<Reservations>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public List<Reservations> Reservation_Get(ReservationsDTO reservationsDto)
+        public List<Reservations> Reservation_Get(Reservations reservations)
         {
-            return this.reservationsService.Reservation_Get(reservationsDto);
+            return this.reservationsService.Reservation_Get(reservations);
         }
 
 

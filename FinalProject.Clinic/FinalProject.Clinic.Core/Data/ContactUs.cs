@@ -19,6 +19,8 @@ namespace FinalProject.Clinic.Core
         public string ContactName { get; set; }
         public string Email { get; set; }
         public string Message { get; set; }
+        public string ContactSubject { get; set; }
+        public string ContactMessage { get; set; }
 
         public virtual SiteSettings Site { get; set; }
     }

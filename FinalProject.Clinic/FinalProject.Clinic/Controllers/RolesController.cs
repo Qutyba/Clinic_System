@@ -20,7 +20,7 @@ namespace FinalProject.Clinic.API.Controllers
         }
 
         [HttpGet]
-        [Route("GetRoles")]
+        [Route("Roles_Get")]
         [ProducesResponseType(typeof(List<Roles>), StatusCodes.Status200OK)]
         public List<Roles> Roles_Get()
         {
