@@ -14,7 +14,7 @@ namespace FinalProject.Clinic.Infra.Repository
     public class UsersRepository : IUsersRepository
     {
         private readonly IDbContext dbContext;
-        public UsersRepository(IDbContext dbContext) 
+        public UsersRepository(IDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
@@ -40,6 +40,7 @@ namespace FinalProject.Clinic.Infra.Repository
         public List<Users> Users_Get(Users users)
         {
             var p = new DynamicParameters();
+
             p.Add("@UserID", users.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("@RoleID", users.RoleId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("@Username", users.Username, dbType: DbType.String, direction: ParameterDirection.Input);
@@ -84,7 +85,7 @@ namespace FinalProject.Clinic.Infra.Repository
 
         }
 
-        public bool Users_UpdatePassword(UsersUpdatePasswordDTO users) 
+        public bool Users_UpdatePassword(UsersUpdatePasswordDTO users)
         {
             var p = new DynamicParameters();
             p.Add("@UserID", users.UserId, dbType: DbType.Int32, direction: ParameterDirection.Input);

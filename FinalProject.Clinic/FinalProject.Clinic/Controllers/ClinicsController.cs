@@ -19,7 +19,7 @@ namespace FinalProject.Clinic.API.Controllers
             clinicsService = _clinicsService;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Clinics_Get")]
         [ProducesResponseType(typeof(List<Clinics>),StatusCodes.Status200OK)]
         public List<Clinics> Clinics_Get(Clinics clinics)

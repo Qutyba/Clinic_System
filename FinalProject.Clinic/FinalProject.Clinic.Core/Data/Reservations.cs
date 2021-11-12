@@ -12,15 +12,15 @@ namespace FinalProject.Clinic.Core
     public class Reservations
     {
         [Key]
-        public int ReservationId { get; set; }
-        public int ClinicId { get; set; }
+        public int? ReservationId { get; set; }
+        public int? ClinicId { get; set; }
         [ForeignKey("ClinicId")]
-        public int PatientId { get; set; }
+        public int? PatientId { get; set; }
         [ForeignKey("PatientId")]
 
-        public DateTime ReservationDate { get; set; }
-        public DateTime ReservationFrom { get; set; }
-        public DateTime ReservationTo { get; set; }
+        public DateTime? ReservationDate { get; set; }
+        public DateTime? ReservationFrom { get; set; }
+        public DateTime? ReservationTo { get; set; }
 
         public virtual Clinics Clinic { get; set; }
         public virtual Users ClinicNavigation { get; set; }

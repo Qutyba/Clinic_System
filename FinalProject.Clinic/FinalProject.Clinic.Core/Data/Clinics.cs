@@ -13,10 +13,10 @@ namespace FinalProject.Clinic.Core
     {
        
         [Key]
-        public int ClinicId { get; set; }
+        public int? ClinicId { get; set; }
         public string ClinicName { get; set; }
-        public int ManagerId { get; set; }
-        public int CategoryId { get; set; }
+        public int? ManagerId { get; set; }
+        public int? CategoryId { get; set; }
         [ForeignKey("CategoryId")]
 
         public string Logo { get; set; }

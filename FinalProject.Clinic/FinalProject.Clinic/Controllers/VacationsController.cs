@@ -19,7 +19,7 @@ namespace FinalProject.Clinic.API.Controllers
             vacationsService = _vacationsService;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Vacations_Get")]
         [ProducesResponseType(typeof(List<Vacations>), StatusCodes.Status200OK)]
         public List<Vacations> Vacations_Get(Vacations vacations)

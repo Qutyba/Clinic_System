@@ -13,12 +13,12 @@ namespace FinalProject.Clinic.Core
     {
         [Key]
         public int VacationId { get; set; }
-        public int ClinicId { get; set; }
+        public int? ClinicId { get; set; }
         [ForeignKey("ClinicId")]
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public string Description { get; set; }
-
+        
         public virtual Clinics Clinic { get; set; }
     }
 }

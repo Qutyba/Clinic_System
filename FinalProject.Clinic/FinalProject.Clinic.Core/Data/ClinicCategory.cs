@@ -11,7 +11,7 @@ namespace FinalProject.Clinic.Core
     public class ClinicCategory
     {
         [Key]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
 

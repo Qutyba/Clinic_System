@@ -26,7 +26,7 @@ namespace FinalProject.Clinic.Infra.Repository
 
             p.Add("@ClinicId", reservations.ClinicId, dbType: DbType.Int32, direction: ParameterDirection.Input);
             p.Add("@PatientId", reservations.PatientId, dbType: DbType.Int32, direction: ParameterDirection.Input);
-            p.Add("@ReservationDate", reservations.ReservationDate.Date, dbType: DbType.Date, direction: ParameterDirection.Input);
+            p.Add("@ReservationDate", reservations.ReservationDate?.Date, dbType: DbType.Date, direction: ParameterDirection.Input);
             p.Add("@ReservationFrom", reservations.ReservationFrom, dbType: DbType.DateTime, direction: ParameterDirection.Input);
             p.Add("@ReservationTo", reservations.ReservationTo, dbType: DbType.DateTime, direction: ParameterDirection.Input);
 

@@ -31,8 +31,7 @@ namespace FinalProject.Clinic.API.Controllers
         [HttpPost]
         [Route("Users_Get")]
         [ProducesResponseType(typeof(List<Users>), StatusCodes.Status200OK)]
-
-        public List<Users> Users_Get(Users users)
+        public List<Users> Users_Get([FromBody]Users users)
         {
             return usersService.Users_Get(users);
         }

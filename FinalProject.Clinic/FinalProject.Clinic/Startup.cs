@@ -34,6 +34,14 @@ namespace FinalProject.Clinic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(corsOptions =>
+            {
+                corsOptions.AddPolicy("x",builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+        });
+
             services.AddControllers();
             services.AddScoped<IDbContext, DbContext>();
             services.AddScoped<IUsersRepository, UsersRepository>();
@@ -97,7 +105,7 @@ namespace FinalProject.Clinic
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("x");
             app.UseHttpsRedirection();
 
             app.UseRouting();

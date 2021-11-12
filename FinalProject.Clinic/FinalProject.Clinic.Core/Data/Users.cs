@@ -11,10 +11,10 @@ namespace FinalProject.Clinic.Core
 {
     public class Users
     {
-       
+
         [Key]
-        public int UserId { get; set; }
-        public int RoleId { get; set; }
+        public int? UserId { get; set; }
+        public int? RoleId { get; set; }
         [ForeignKey("RoleId")]
         public string Username { get; set; }
         public string Password { get; set; }

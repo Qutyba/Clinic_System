@@ -12,10 +12,10 @@ namespace FinalProject.Clinic.Core
     public class WorkingHours
     {
         [Key]
-        public int WorkingHoursId { get; set; }
-        public int ClinicId { get; set; }
+        public int? WorkingHoursId { get; set; }
+        public int? ClinicId { get; set; }
         [ForeignKey("ClinicId")]
-        public int DayId { get; set; }
+        public int? DayId { get; set; }
         public DateTime WorkingFrom { get; set; }
         public DateTime WorkingTo { get; set; }
         public DateTime? BreakFrom { get; set; }
